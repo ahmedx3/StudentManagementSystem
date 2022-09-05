@@ -5,5 +5,5 @@ public class Student {
     private int mobileNumber;
     private int age;
     private String address;
-    private String gender;
+    private Gender gender;
 }
