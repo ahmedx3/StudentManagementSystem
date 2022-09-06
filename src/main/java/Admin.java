@@ -83,7 +83,9 @@ public class Admin {
         }
     }
 
-    // TODO: Create student methods
+    void addCourse(Course c) {
+        Database.courses.add(c);
+    }
 
     /////////// Setters and Getters ///////////
 

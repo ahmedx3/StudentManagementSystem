@@ -12,7 +12,7 @@ public class Student {
 
     private static int count = 0;
 
-    private List<Course> enrolledCourses = new ArrayList<>();
+    private final List<Course> enrolledCourses = new ArrayList<>();
 
     /////////// Constructors ///////////
 
@@ -30,6 +30,24 @@ public class Student {
         this.gender = gender;
         this.id = count;
         count++;
+    }
+
+    /////////// Functions ///////////
+
+    void enrollInCourse(Course c) {
+        this.enrolledCourses.add(c);
+        for(Course course: Database.courses) {
+            if(course.equals(c)) {
+                course.enrollStudent(this);
+            }
+        }
+    }
+
+    void viewEnrolledCourses() {
+        System.out.println("My enrolled courses are: ");
+        for (Course c: enrolledCourses) {
+            System.out.println(c);
+        }
     }
 
     /////////// Setters and Getters ///////////
@@ -84,5 +102,20 @@ public class Student {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    /////////// To String ///////////
+
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", mobileNumber='" + mobileNumber + '\'' +
+                ", age=" + age +
+                ", address='" + address + '\'' +
+                ", gender=" + gender +
+                '}';
     }
 }

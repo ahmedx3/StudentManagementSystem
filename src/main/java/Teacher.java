@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Teacher {
     private final int id;
     private String name;
@@ -18,6 +21,26 @@ public class Teacher {
         this.mobileNumber = mobileNumber;
         this.id = count;
         count++;
+    }
+
+    /////////// Functions ///////////
+
+    List<Student> getStudentsInCourse(int courseID) {
+        List<Student> students = new ArrayList<>();
+        for (Course c: Database.courses) {
+            if (c.getId() == courseID) {
+                students = c.getEnrolledStudents();
+            }
+        }
+        return students;
+    }
+    
+    void getStudentData(int studentID) {
+        for (Student s : Database.students) {
+            if (s.getId() == studentID) {
+                System.out.println(s);
+            }
+        }
     }
 
     /////////// Setters and Getters ///////////
@@ -48,5 +71,17 @@ public class Teacher {
 
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
+    }
+
+    ///////////// ToString /////////////
+
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", mobileNumber='" + mobileNumber + '\'' +
+                '}';
     }
 }
