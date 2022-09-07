@@ -51,6 +51,9 @@ public class Admin {
                 teacher.setEmail(email);
                 teacher.setMobileNumber(mobileNumber);
             }
+            else {
+                System.out.println("Teacher not found!");
+            }
         }
     }
 
@@ -79,6 +82,9 @@ public class Admin {
                 student.setName(name);
                 student.setEmail(email);
                 student.setMobileNumber(mobileNumber);
+            }
+            else {
+                System.out.println("Student not found!");
             }
         }
     }

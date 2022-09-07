@@ -58,6 +58,10 @@ public class Student {
         }
     }
 
+    void submitAssignment(AssignmentSubmission assignmentSubmission) {
+        Database.getInstance().getAssignmentSubmissions().add(assignmentSubmission);
+    }
+
     /////////// Setters and Getters ///////////
 
     public String getName() {

@@ -9,6 +9,8 @@ public class Database {
     private final List<Student> students = new ArrayList<>();
     private final List<Course> courses = new ArrayList<>();
     private final List<Assignment> assignments = new ArrayList<>();
+    private final List<AssignmentSubmission> assignmentSubmissions = new ArrayList<>();
+    private final List<CourseAttendance> courseAttendances = new ArrayList<>();
 
     private Database()
     {
@@ -16,6 +18,14 @@ public class Database {
 
     public List<Assignment> getAssignments() {
         return assignments;
+    }
+
+    public List<AssignmentSubmission> getAssignmentSubmissions() {
+        return assignmentSubmissions;
+    }
+
+    public List<CourseAttendance> getCourseAttendances() {
+        return courseAttendances;
     }
 
     public List<Teacher> getTeachers() {

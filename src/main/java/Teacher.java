@@ -27,24 +27,42 @@ public class Teacher {
 
     List<Student> getStudentsInCourse(int courseID) {
         List<Student> students = new ArrayList<>();
+        boolean found = false;
         for (Course c: Database.getInstance().getCourses()) {
             if (c.getId() == courseID) {
                 students = c.getEnrolledStudents();
+                found = true;
             }
         }
+        if (!found) {
+            System.out.println("Students not found!");
+        }
+
         return students;
     }
     
     void getStudentData(int studentID) {
+        boolean found = false;
         for (Student s : Database.getInstance().getStudents()) {
             if (s.getId() == studentID) {
                 System.out.println(s);
+                found = true;
             }
+        }
+
+        if (!found) {
+            System.out.println("Student not found!");
         }
     }
 
     void addAssignment(Assignment assignment) {
         Database.getInstance().getAssignments().add(assignment);
+    }
+
+    void submitStudentsAttendance(CourseAttendance[] courseAttendances) {
+        for (CourseAttendance courseAttendance: courseAttendances) {
+            Database.getInstance().getCourseAttendances().add(courseAttendance);
+        }
     }
 
     /////////// Setters and Getters ///////////
