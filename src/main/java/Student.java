@@ -44,7 +44,7 @@ public class Student {
     }
 
     void viewEnrolledCourses() {
-        System.out.println("My enrolled courses are: ");
+        System.out.println("My enrolled courses are:");
         for (Course c: enrolledCourses) {
             System.out.println(c);
         }

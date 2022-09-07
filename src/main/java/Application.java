@@ -13,7 +13,7 @@ public class Application {
         Course course1 = new Course("CMPN211",teacher1);
         Course course2 = new Course("CMPN480",teacher2);
         Assignment assignment1 = new Assignment("Do 1",0 , new Date());
-        AssignmentSubmission assignmentSubmission1 = new AssignmentSubmission(assignment1.getId(),student1.getId(),course1.getId(),new Date(),"Submittion 1",98);
+        AssignmentSubmission assignmentSubmission1 = new AssignmentSubmission(assignment1.getId(),student1.getId(),course1.getId(),new Date(),"Submitting 1",98);
 
         admin.addTeacher(teacher1);
         admin.addTeacher(teacher2);
@@ -33,10 +33,7 @@ public class Application {
 
         student2.enrollInCourse(course1);
 
-        List<Student> enrolledStudents = teacher1.getStudentsInCourse(Database.getInstance().getCourses().get(0).getId());
-        for (Student s: enrolledStudents) {
-            System.out.println(s);
-        }
+        teacher1.getStudentsInCourse(Database.getInstance().getCourses().get(0).getId());
 
         teacher3.getStudentData(student2.getId());
 

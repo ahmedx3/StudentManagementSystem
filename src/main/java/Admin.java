@@ -45,15 +45,17 @@ public class Admin {
     }
 
     void updateTeacherData(Teacher t,String name,String email,String mobileNumber) {
+        boolean found = false;
         for (Teacher teacher: Database.getInstance().getTeachers()) {
             if (teacher.equals(t)) {
                 teacher.setName(name);
                 teacher.setEmail(email);
                 teacher.setMobileNumber(mobileNumber);
+                found = true;
             }
-            else {
-                System.out.println("Teacher not found!");
-            }
+        }
+        if (!found) {
+            System.out.println("Teacher not found!");
         }
     }
 

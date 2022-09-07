@@ -25,7 +25,7 @@ public class Teacher {
 
     /////////// Functions ///////////
 
-    List<Student> getStudentsInCourse(int courseID) {
+    void getStudentsInCourse(int courseID) {
         List<Student> students = new ArrayList<>();
         boolean found = false;
         for (Course c: Database.getInstance().getCourses()) {
@@ -38,7 +38,8 @@ public class Teacher {
             System.out.println("Students not found!");
         }
 
-        return students;
+        System.out.println("Students in course " + courseID + " are:");
+        System.out.println(students);
     }
     
     void getStudentData(int studentID) {
