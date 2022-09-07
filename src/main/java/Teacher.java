@@ -27,7 +27,7 @@ public class Teacher {
 
     List<Student> getStudentsInCourse(int courseID) {
         List<Student> students = new ArrayList<>();
-        for (Course c: Database.courses) {
+        for (Course c: Database.getInstance().getCourses()) {
             if (c.getId() == courseID) {
                 students = c.getEnrolledStudents();
             }
@@ -36,11 +36,15 @@ public class Teacher {
     }
     
     void getStudentData(int studentID) {
-        for (Student s : Database.students) {
+        for (Student s : Database.getInstance().getStudents()) {
             if (s.getId() == studentID) {
                 System.out.println(s);
             }
         }
+    }
+
+    void addAssignment(Assignment assignment) {
+        Database.getInstance().getAssignments().add(assignment);
     }
 
     /////////// Setters and Getters ///////////

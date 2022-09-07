@@ -26,15 +26,15 @@ public class Admin {
     /////////// Functions ///////////
 
     void addTeacher(Teacher t) {
-        Database.teachers.add(t);
+        Database.getInstance().getTeachers().add(t);
     }
 
     void removeTeacher(Teacher t) {
-        Database.teachers.remove(t);
+        Database.getInstance().getTeachers().remove(t);
     }
 
     void viewAllTeachers() {
-        for(Teacher t: Database.teachers){
+        for(Teacher t: Database.getInstance().getTeachers()){
             System.out.println("Teacher Name: " + t.getName());
         }
     }
@@ -45,7 +45,7 @@ public class Admin {
     }
 
     void updateTeacherData(Teacher t,String name,String email,String mobileNumber) {
-        for (Teacher teacher: Database.teachers) {
+        for (Teacher teacher: Database.getInstance().getTeachers()) {
             if (teacher.equals(t)) {
                 teacher.setName(name);
                 teacher.setEmail(email);
@@ -55,15 +55,15 @@ public class Admin {
     }
 
     void addStudent(Student s) {
-        Database.students.add(s);
+        Database.getInstance().getStudents().add(s);
     }
 
     void removeStudent(Student s) {
-        Database.students.remove(s);
+        Database.getInstance().getStudents().remove(s);
     }
 
     void viewAllStudents() {
-        for(Student s: Database.students){
+        for(Student s: Database.getInstance().getStudents()){
             System.out.println("Student Name: " + s.getName());
         }
     }
@@ -74,7 +74,7 @@ public class Admin {
     }
 
     void updateStudentData(Student s,String name,String email,String mobileNumber) {
-        for (Student student: Database.students) {
+        for (Student student: Database.getInstance().getStudents()) {
             if (student.equals(s)) {
                 student.setName(name);
                 student.setEmail(email);
@@ -84,7 +84,7 @@ public class Admin {
     }
 
     void addCourse(Course c) {
-        Database.courses.add(c);
+        Database.getInstance().getCourses().add(c);
     }
 
     /////////// Setters and Getters ///////////

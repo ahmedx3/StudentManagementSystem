@@ -26,7 +26,7 @@ public class Application {
         student1.enrollInCourse(course1);
         student1.viewEnrolledCourses();
 
-        List<Student> enrolledStudents = teacher1.getStudentsInCourse(Database.courses.get(0).getId());
+        List<Student> enrolledStudents = teacher1.getStudentsInCourse(Database.getInstance().getCourses().get(0).getId());
         for (Student s: enrolledStudents) {
             System.out.println(s);
         }

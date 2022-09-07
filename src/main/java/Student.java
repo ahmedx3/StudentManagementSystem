@@ -36,7 +36,7 @@ public class Student {
 
     void enrollInCourse(Course c) {
         this.enrolledCourses.add(c);
-        for(Course course: Database.courses) {
+        for(Course course: Database.getInstance().getCourses()) {
             if(course.equals(c)) {
                 course.enrollStudent(this);
             }
