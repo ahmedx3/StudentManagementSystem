@@ -1,24 +1,20 @@
-import java.util.ArrayList;
-import java.util.List;
 
-public class Admin {
+
+public class Admin extends Person {
     private final int id;
-    private String name;
-    private String email;
-    private String mobileNumber;
 
     private static int count = 0;
 
     /////////// Constructors ///////////
 
     public Admin() {
-        this("Undefined","Undefined","0");
+        super();
+        this.id = count;
+        count++;
     }
 
     public Admin(String name, String email, String mobileNumber) {
-        this.name = name;
-        this.email = email;
-        this.mobileNumber = mobileNumber;
+        super(name,email,mobileNumber);
         this.id = count;
         count++;
     }

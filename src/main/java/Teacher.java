@@ -1,24 +1,21 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Teacher {
+public class Teacher extends Person {
     private final int id;
-    private String name;
-    private String email;
-    private String mobileNumber;
 
     private static int count = 0;
 
     /////////// Constructors ///////////
 
     public Teacher() {
-        this("Undefined","Undefined","0");
+        super();
+        this.id = count;
+        count++;
     }
 
     public Teacher(String name, String email, String mobileNumber) {
-        this.name = name;
-        this.email = email;
-        this.mobileNumber = mobileNumber;
+        super(name,email,mobileNumber);
         this.id = count;
         count++;
     }
@@ -38,7 +35,7 @@ public class Teacher {
             System.out.println("Students not found!");
         }
 
-        System.out.println("Students in course " + courseID + " are:");
+        System.out.println("Students in course " + Database.getInstance().getCourseByID(courseID).getCodeName() + " are:");
         System.out.println(students);
     }
     

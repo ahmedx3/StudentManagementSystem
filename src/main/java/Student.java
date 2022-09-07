@@ -1,11 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Student {
+public class Student extends Person {
     private final int id;
-    private String name;
-    private String email;
-    private String mobileNumber;
     private int age;
     private String address;
     private Gender gender;
@@ -22,9 +19,7 @@ public class Student {
     }
 
     public Student(String name, String email, String mobileNumber, int age , String address, Gender gender) {
-        this.name = name;
-        this.email = email;
-        this.mobileNumber = mobileNumber;
+        super(name,email,mobileNumber);
         this.age = age;
         this.address = address;
         this.gender = gender;

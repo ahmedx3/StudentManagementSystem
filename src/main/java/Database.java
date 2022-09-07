@@ -17,6 +17,14 @@ public class Database {
     {
     }
 
+    public static Database getInstance()
+    {
+        if (database_instance == null)
+            database_instance = new Database();
+
+        return database_instance;
+    }
+
     public List<Assignment> getAssignments() {
         return assignments;
     }
@@ -41,12 +49,30 @@ public class Database {
         return courses;
     }
 
-    public static Database getInstance()
-    {
-        if (database_instance == null)
-            database_instance = new Database();
-
-        return database_instance;
+    Teacher getTeacherByID(int id) {
+        for (Teacher teacher: teachers) {
+            if (teacher.getId() == id) {
+                return teacher;
+            }
+        }
+        return null;
     }
 
+    Student getStudentByID(int id) {
+        for (Student student: students) {
+            if (student.getId() == id) {
+                return student;
+            }
+        }
+        return null;
+    }
+
+    Course getCourseByID(int id) {
+        for (Course course: courses) {
+            if (course.getId() == id) {
+                return course;
+            }
+        }
+        return null;
+    }
 }
