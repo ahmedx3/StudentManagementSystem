@@ -50,6 +50,14 @@ public class Student {
         }
     }
 
+    void viewAssignments(int courseID) {
+        for(Assignment assignment: Database.getInstance().getAssignments()) {
+            if(assignment.getCourseId() == courseID) {
+                System.out.println(assignment);
+            }
+        }
+    }
+
     /////////// Setters and Getters ///////////
 
     public String getName() {

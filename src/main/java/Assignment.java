@@ -48,6 +48,14 @@ public class Assignment {
         return dueDate;
     }
 
+    @Override
+    public String toString() {
+        return "Assignment{" +
+                "description='" + description + '\'' +
+                ", dueDate=" + dueDate +
+                '}';
+    }
+
     public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }

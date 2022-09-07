@@ -1,3 +1,4 @@
+import java.util.Date;
 import java.util.List;
 
 public class Application {
@@ -10,6 +11,7 @@ public class Application {
         Student student1 = new Student("Abdallah","abdallah@gmail.com","01007896541",24,"address1",Gender.MALE);
         Student student2 = new Student("Islam","islam@gmail.com","01107896541",23,"address2",Gender.MALE);
         Course course1 = new Course("CMPN211",teacher1);
+        Assignment assignment1 = new Assignment("Do 1",0 , new Date());
 
         admin.addTeacher(teacher1);
         admin.addTeacher(teacher2);
@@ -32,5 +34,9 @@ public class Application {
         }
 
         teacher3.getStudentData(student2.getId());
+
+        teacher1.addAssignment(assignment1);
+
+        student1.viewAssignments(0);
     }
 }
