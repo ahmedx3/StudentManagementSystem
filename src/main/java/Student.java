@@ -128,6 +128,7 @@ public class Student {
                 ", age=" + age +
                 ", address='" + address + '\'' +
                 ", gender=" + gender +
+                ", enrolledCourses=" + enrolledCourses +
                 '}';
     }
 }

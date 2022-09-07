@@ -5,6 +5,7 @@ public class Database {
 
     private static Database database_instance = null;
 
+    // TODO: use hashmap
     private final List<Teacher> teachers = new ArrayList<>();
     private final List<Student> students = new ArrayList<>();
     private final List<Course> courses = new ArrayList<>();

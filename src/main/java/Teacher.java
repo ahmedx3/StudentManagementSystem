@@ -65,6 +65,19 @@ public class Teacher {
         }
     }
 
+    void getAllCourses() {
+        for (Course course: Database.getInstance().getCourses()) {
+            System.out.println(course);
+        }
+    }
+
+    void viewStudentAssignedCourses() {
+        System.out.println("Students Enrolled Courses are:");
+        for(Student student: Database.getInstance().getStudents()) {
+            System.out.println(student);
+        }
+    }
+
     /////////// Setters and Getters ///////////
 
     public int getId() {

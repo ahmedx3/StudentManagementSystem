@@ -11,6 +11,7 @@ public class Application {
         Student student1 = new Student("Abdallah","abdallah@gmail.com","01007896541",24,"address1",Gender.MALE);
         Student student2 = new Student("Islam","islam@gmail.com","01107896541",23,"address2",Gender.MALE);
         Course course1 = new Course("CMPN211",teacher1);
+        Course course2 = new Course("CMPN480",teacher2);
         Assignment assignment1 = new Assignment("Do 1",0 , new Date());
 
         admin.addTeacher(teacher1);
@@ -26,7 +27,10 @@ public class Application {
         admin.viewAllTeachers();
 
         student1.enrollInCourse(course1);
+        student1.enrollInCourse(course2);
         student1.viewEnrolledCourses();
+
+        student2.enrollInCourse(course1);
 
         List<Student> enrolledStudents = teacher1.getStudentsInCourse(Database.getInstance().getCourses().get(0).getId());
         for (Student s: enrolledStudents) {
@@ -38,5 +42,7 @@ public class Application {
         teacher1.addAssignment(assignment1);
 
         student1.viewAssignments(0);
+
+        teacher1.viewStudentAssignedCourses();
     }
 }
