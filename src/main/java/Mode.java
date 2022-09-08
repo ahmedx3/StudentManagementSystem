@@ -1,0 +1,4 @@
+public enum Mode {
+    WELCOME, ADMIN_REGISTER , ADMIN_DASHBOARD
+
+}

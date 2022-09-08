@@ -23,21 +23,22 @@ public class Admin extends Person {
 
     void addTeacher(Teacher t) {
         Database.getInstance().getTeachers().add(t);
+        System.out.println("Teacher added successfully!\n");
     }
 
     void removeTeacher(Teacher t) {
         Database.getInstance().getTeachers().remove(t);
+        System.out.println("Teacher removed successfully!\n");
     }
 
     void viewAllTeachers() {
         for(Teacher t: Database.getInstance().getTeachers()){
-            System.out.println("Teacher Name: " + t.getName());
+            System.out.println(t);
         }
     }
 
     void viewTeacherDetails(Teacher t) {
-        System.out.println("Teacher Name: " + t.getName());
-        System.out.println("Teacher Email: " + t.getEmail());
+        System.out.println(t);
     }
 
     void updateTeacherData(Teacher t,String name,String email,String mobileNumber) {
@@ -48,6 +49,7 @@ public class Admin extends Person {
                 teacher.setEmail(email);
                 teacher.setMobileNumber(mobileNumber);
                 found = true;
+                System.out.println("Teacher updated successfully!");
             }
         }
         if (!found) {
@@ -65,13 +67,12 @@ public class Admin extends Person {
 
     void viewAllStudents() {
         for(Student s: Database.getInstance().getStudents()){
-            System.out.println("Student Name: " + s.getName());
+            System.out.println(s);
         }
     }
 
     void viewStudentDetails(Student s) {
-        System.out.println("Student Name: " + s.getName());
-        System.out.println("Student Email: " + s.getEmail());
+        System.out.println(s);
     }
 
     void updateStudentData(Student s,String name,String email,String mobileNumber) {
