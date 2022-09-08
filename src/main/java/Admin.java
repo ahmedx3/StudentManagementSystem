@@ -59,6 +59,7 @@ public class Admin extends Person {
 
     void addStudent(Student s) {
         Database.getInstance().getStudents().add(s);
+        System.out.println("Student Added Successfully!");
     }
 
     void removeStudent(Student s) {

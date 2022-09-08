@@ -41,7 +41,7 @@ public class TestClasses {
 
         student1.viewAssignments(0);
 
-        teacher1.viewStudentAssignedCourses();
+        teacher1.viewStudentsAssignedCourses();
 
         student1.submitAssignment(assignmentSubmission1);
     }

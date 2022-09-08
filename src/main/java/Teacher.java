@@ -55,6 +55,7 @@ public class Teacher extends Person {
 
     void addAssignment(Assignment assignment) {
         Database.getInstance().getAssignments().add(assignment);
+        System.out.println("Assignment added successfully!");
     }
 
     void submitStudentsAttendance(CourseAttendance[] courseAttendances) {
@@ -63,13 +64,17 @@ public class Teacher extends Person {
         }
     }
 
+    void submitStudentsAttendance(CourseAttendance courseAttendance) {
+        Database.getInstance().getCourseAttendances().add(courseAttendance);
+    }
+
     void getAllCourses() {
         for (Course course: Database.getInstance().getCourses()) {
             System.out.println(course);
         }
     }
 
-    void viewStudentAssignedCourses() {
+    void viewStudentsAssignedCourses() {
         System.out.println("Students Enrolled Courses are:");
         for(Student student: Database.getInstance().getStudents()) {
             System.out.println(student);
