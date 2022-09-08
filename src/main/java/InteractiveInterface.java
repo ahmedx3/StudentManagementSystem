@@ -4,6 +4,8 @@ public class InteractiveInterface {
 
     private Mode mode;
     private Admin admin;
+    private Student student;
+    private Teacher teacher;
 
     InteractiveInterface() {
         mode = Mode.WELCOME;
@@ -21,6 +23,14 @@ public class InteractiveInterface {
                 case ADMIN_DASHBOARD:
                     adminDashboard();
                     break;
+                case LOGIN_SCREEN:
+                    loginScreen();
+                    break;
+                case STUDENT_DASHBOARD:
+                    studentDashboard();
+                    break;
+                case TEACHER_DASHBOARD:
+                    teacherDashboard();
             }
         }
     }
@@ -66,6 +76,7 @@ public class InteractiveInterface {
         System.out.println("7 - View All Students");
         System.out.println("8 - View Student Details");
         System.out.println("9 - Update Student Data");
+        System.out.println("10 - Logout");
 
         Scanner scan = new Scanner(System.in);
         int adminMode = scan.nextInt();
@@ -91,13 +102,72 @@ public class InteractiveInterface {
                 break;
             case 6:
                 removeStudent();
+                break;
             case 7:
                 viewAllStudents();
+                break;
             case 8:
                 viewStudentDetails();
+                break;
             case 9:
                 updateStudentData();
+                break;
+            case 10:
+                logout();
+                break;
         }
+    }
+
+    private void loginScreen() {
+        System.out.println("============ Login ============");
+
+        System.out.println("0 - Admin");
+        System.out.println("1 - Teacher");
+        System.out.println("2 - Student");
+
+        Scanner scan = new Scanner(System.in);
+        int loginMode = scan.nextInt();
+
+        switch (loginMode) {
+            case 0:
+                mode = Mode.ADMIN_DASHBOARD;
+                break;
+            case 1:
+                System.out.print("Enter your ID: ");
+                Scanner scanTeacher = new Scanner(System.in);
+                int techerID = scanTeacher.nextInt();
+
+                Teacher teacher = Database.getInstance().getTeacherByID(techerID);
+
+                if (teacher == null) {
+                    System.out.println("Not found!\n");
+                    break;
+                }
+
+                this.teacher = teacher;
+                mode = Mode.TEACHER_DASHBOARD;
+                break;
+            case 2:
+                System.out.print("Enter your ID: ");
+                Scanner scanStudent = new Scanner(System.in);
+                int studentID = scanStudent.nextInt();
+
+                Student student = Database.getInstance().getStudentByID(studentID);
+
+                if (student == null) {
+                    System.out.println("Not found!\n");
+                    break;
+                }
+
+                this.student = student;
+                mode = Mode.STUDENT_DASHBOARD;
+        }
+    }
+
+    private void logout() {
+        mode = Mode.LOGIN_SCREEN;
+        this.student = null;
+        this.teacher = null;
     }
 
     private void updateStudentData() {
@@ -237,7 +307,7 @@ public class InteractiveInterface {
 
     private void removeTeacher() {
         System.out.println("============ Remove Teacher ============");
-        Scanner sc= new Scanner(System.in);
+
         System.out.print("Teacher id to remove: ");
         Scanner scan = new Scanner(System.in);
         int id = scan.nextInt();
@@ -266,5 +336,79 @@ public class InteractiveInterface {
         Teacher teacher = new Teacher(name,email,mobileNumber);
 
         admin.addTeacher(teacher);
+    }
+
+    private void studentDashboard() {
+        System.out.println("============ Student Dashboard ============");
+
+        System.out.println("0 - Enroll in Course");
+        System.out.println("1 - View Enrolled Courses");
+        System.out.println("2 - View Assignments");
+        System.out.println("3 - Submit Assignment");
+        System.out.println("4 - Logout");
+
+        Scanner scan = new Scanner(System.in);
+        int studentMode = scan.nextInt();
+
+        switch (studentMode) {
+            case 0:
+                enrollInCourse();
+                break;
+            case 4:
+                logout();
+                break;
+        }
+    }
+
+    private void enrollInCourse() {
+        System.out.println("============ Enroll in course ============");
+
+        System.out.print("Enter course ID to enroll: ");
+        Scanner scan = new Scanner(System.in);
+        int id = scan.nextInt();
+
+        Course course = Database.getInstance().getCourseByID(id);
+
+        if (course == null) {
+            System.out.println("Course not found!\n");
+            return;
+        }
+
+        this.student.enrollInCourse(course);
+    }
+
+    private void teacherDashboard() {
+        System.out.println("============ Teacher Dashboard ============");
+
+        System.out.println("0 - Create course");
+        System.out.println("1 - View Students Assigned Course");
+        System.out.println("2 - Get Students In Course");
+        System.out.println("3 - Get All Courses");
+        System.out.println("4 - Get Student Data");
+        System.out.println("5 - Add Assignment");
+        System.out.println("6 - Submit Students Attendance");
+        System.out.println("7 - Logout");
+
+        Scanner scan = new Scanner(System.in);
+        int teacherMode = scan.nextInt();
+
+        switch (teacherMode) {
+            case 0:
+                createCourse();
+                break;
+            case 7:
+                logout();
+                break;
+        }
+    }
+
+    private void createCourse() {
+        System.out.println("============ Create course ============");
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter code name: ");
+        String codeName = sc.nextLine();
+
+        this.teacher.createCourse(codeName);
     }
 }

@@ -76,6 +76,11 @@ public class Teacher extends Person {
         }
     }
 
+    void createCourse(String codeName) {
+        Database.getInstance().getCourses().add(new Course(codeName,this));
+        System.out.println("Course Added Successfully!\n");
+    }
+
     /////////// Setters and Getters ///////////
 
     public int getId() {

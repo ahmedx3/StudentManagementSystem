@@ -36,6 +36,7 @@ public class Student extends Person {
                 course.enrollStudent(this);
             }
         }
+        System.out.println("Enrolled Successfully!\n");
     }
 
     void viewEnrolledCourses() {
