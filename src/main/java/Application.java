@@ -3,7 +3,6 @@ import java.util.Date;
 
 public class Application {
     public static void main(String[] args) {
-        InteractiveInterface interactiveInterface = new InteractiveInterface();
-        interactiveInterface.run();
+        new InteractiveInterface().run();
     }
 }
