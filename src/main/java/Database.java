@@ -75,4 +75,13 @@ public class Database {
         }
         return null;
     }
+
+    Assignment getAssignmentByID(int id) {
+        for (Assignment assignment: assignments) {
+            if (assignment.getId() == id) {
+                return assignment;
+            }
+        }
+        return null;
+    }
 }

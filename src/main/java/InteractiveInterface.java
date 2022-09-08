@@ -359,10 +359,69 @@ public class InteractiveInterface {
                 break;
             case 1:
                 viewEnrolledCourses();
+                break;
+            case 2:
+                viewAssignments();
+                break;
+            case 3:
+                submitAssignment();
             case 4:
                 logout();
                 break;
         }
+    }
+
+    private void submitAssignment() {
+        System.out.println("============ Submit Assignment ============");
+
+        System.out.print("Enter assignment ID: ");
+        Scanner scan = new Scanner(System.in);
+        int assignmentID = scan.nextInt();
+
+        Assignment assignment = Database.getInstance().getAssignmentByID(assignmentID);
+
+        if (assignment == null) {
+            System.out.println("Assignment not found!\n");
+            return;
+        }
+
+        System.out.print("Enter course ID : ");
+        int courseID = scan.nextInt();
+
+        Course course = Database.getInstance().getCourseByID(courseID);
+
+        if (course == null) {
+            System.out.println("Course not found!\n");
+            return;
+        }
+
+        Date date = new Date();
+
+        System.out.print("Enter assignment content : ");
+        scan.nextLine();
+        String assignmentContent = scan.nextLine();
+
+        System.out.print("Enter marks : ");
+        int marks = scan.nextInt();
+
+        this.student.submitAssignment(new AssignmentSubmission(assignmentID,this.student.getId(),courseID,date,assignmentContent,marks));
+    }
+
+    private void viewAssignments() {
+        System.out.println("============ View Assignments ============");
+
+        System.out.print("Enter course ID to view: ");
+        Scanner scan = new Scanner(System.in);
+        int id = scan.nextInt();
+
+        Course course = Database.getInstance().getCourseByID(id);
+
+        if (course == null) {
+            System.out.println("Course not found!\n");
+            return;
+        }
+
+        this.student.viewAssignments(id);
     }
 
     private void viewEnrolledCourses() {
