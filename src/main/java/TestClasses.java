@@ -21,6 +21,7 @@ public class TestClasses {
         admin.addStudent(student1);
         admin.addStudent(student2);
         admin.addCourse(course1);
+        admin.addCourse(course2);
 
         admin.updateTeacherData(teacher1,"Hassan","hassan@gmail.com","01565646846");
         admin.updateTeacherData(teacher1,"Rafaat","rafaat@gmail.com","0156232846");
@@ -30,6 +31,8 @@ public class TestClasses {
         student1.enrollInCourse(course1);
         student1.enrollInCourse(course2);
         student1.viewEnrolledCourses();
+
+        course1.viewEnrolledStudents();
 
         student2.enrollInCourse(course1);
 

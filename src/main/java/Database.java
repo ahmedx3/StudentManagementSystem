@@ -8,7 +8,7 @@ public class Database {
 
     private final HashMap<Integer,Teacher> teachers = new HashMap<>();
     private final HashMap<Integer,Student> students = new HashMap<>();
-    private final List<Course> courses = new ArrayList<>();
+    private final HashMap<Integer,Course> courses = new HashMap<>();
     private final List<Assignment> assignments = new ArrayList<>();
     private final List<AssignmentSubmission> assignmentSubmissions = new ArrayList<>();
     private final List<CourseAttendance> courseAttendances = new ArrayList<>();
@@ -45,7 +45,7 @@ public class Database {
         return students;
     }
 
-    public List<Course> getCourses() {
+    public HashMap<Integer,Course> getCourses() {
         return courses;
     }
 
@@ -58,12 +58,7 @@ public class Database {
     }
 
     Course getCourseByID(int id) {
-        for (Course course: courses) {
-            if (course.getId() == id) {
-                return course;
-            }
-        }
-        return null;
+        return courses.getOrDefault(id, null);
     }
 
     Assignment getAssignmentByID(int id) {

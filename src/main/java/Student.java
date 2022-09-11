@@ -30,12 +30,11 @@ public class Student extends Person {
     /////////// Functions ///////////
 
     void enrollInCourse(Course c) {
+
         this.enrolledCourses.add(c);
-        for(Course course: Database.getInstance().getCourses()) {
-            if(course.equals(c)) {
-                course.enrollStudent(this);
-            }
-        }
+        Course course = Database.getInstance().getCourses().getOrDefault(c.getId(), null);
+        course.enrollStudent(this);
+
         System.out.println("Enrolled Successfully!\n");
     }
 

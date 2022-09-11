@@ -85,7 +85,7 @@ public class Admin extends Person {
     }
 
     void addCourse(Course c) {
-        Database.getInstance().getCourses().add(c);
+        Database.getInstance().getCourses().put(c.getId(),c);
     }
 
     /////////// Setters and Getters ///////////

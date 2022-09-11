@@ -24,17 +24,15 @@ public class Teacher extends Person {
     /////////// Functions ///////////
 
     void getStudentsInCourse(int courseID) {
-        List<Student> students = new ArrayList<>();
-        boolean found = false;
-        for (Course c: Database.getInstance().getCourses()) {
-            if (c.getId() == courseID) {
-                students = c.getEnrolledStudents();
-                found = true;
-            }
+        List<Student> students;
+
+        Course course = Database.getInstance().getCourses().getOrDefault(courseID, null);
+
+        if (course == null) {
+            System.out.println("Course not found!");
+            return;
         }
-        if (!found) {
-            System.out.println("Students not found!");
-        }
+        students = course.getEnrolledStudents();
 
         System.out.println("Students in course " + Database.getInstance().getCourseByID(courseID).getCodeName() + " are:");
         System.out.println(students);
@@ -67,8 +65,8 @@ public class Teacher extends Person {
     }
 
     void getAllCourses() {
-        for (Course course: Database.getInstance().getCourses()) {
-            System.out.println(course);
+        for (Map.Entry<Integer,Course> entry : Database.getInstance().getCourses().entrySet()) {
+            System.out.println(entry.getValue());
         }
     }
 
@@ -80,7 +78,8 @@ public class Teacher extends Person {
     }
 
     void createCourse(String codeName) {
-        Database.getInstance().getCourses().add(new Course(codeName,this));
+        Course course = new Course(codeName,this);
+        Database.getInstance().getCourses().put(course.getId(),course);
         System.out.println("Course Added Successfully!\n");
     }
 
