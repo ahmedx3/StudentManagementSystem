@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Teacher extends Person {
     private final int id;
@@ -40,17 +41,14 @@ public class Teacher extends Person {
     }
     
     void getStudentData(int studentID) {
-        boolean found = false;
-        for (Student s : Database.getInstance().getStudents()) {
-            if (s.getId() == studentID) {
-                System.out.println(s);
-                found = true;
-            }
+        Student student = Database.getInstance().getStudents().getOrDefault(studentID, null);
+
+        if (student == null) {
+            System.out.println("Student not found!");
+            return;
         }
 
-        if (!found) {
-            System.out.println("Student not found!");
-        }
+        System.out.println(student);
     }
 
     void addAssignment(Assignment assignment) {
@@ -76,8 +74,8 @@ public class Teacher extends Person {
 
     void viewStudentsAssignedCourses() {
         System.out.println("Students Enrolled Courses are:");
-        for(Student student: Database.getInstance().getStudents()) {
-            System.out.println(student);
+        for (Map.Entry<Integer,Student> entry : Database.getInstance().getStudents().entrySet()) {
+            System.out.println(entry.getValue());
         }
     }
 

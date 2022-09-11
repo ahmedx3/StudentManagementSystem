@@ -54,17 +54,17 @@ public class Admin extends Person {
     }
 
     void addStudent(Student s) {
-        Database.getInstance().getStudents().add(s);
+        Database.getInstance().getStudents().put(s.getId(),s);
         System.out.println("Student Added Successfully!");
     }
 
     void removeStudent(Student s) {
-        Database.getInstance().getStudents().remove(s);
+        Database.getInstance().getStudents().remove(s.getId());
     }
 
     void viewAllStudents() {
-        for(Student s: Database.getInstance().getStudents()){
-            System.out.println(s);
+        for (Map.Entry<Integer,Student> entry : Database.getInstance().getStudents().entrySet()) {
+            System.out.println(entry.getValue());
         }
     }
 
@@ -73,15 +73,14 @@ public class Admin extends Person {
     }
 
     void updateStudentData(Student s,String name,String email,String mobileNumber) {
-        for (Student student: Database.getInstance().getStudents()) {
-            if (student.equals(s)) {
-                student.setName(name);
-                student.setEmail(email);
-                student.setMobileNumber(mobileNumber);
-            }
-            else {
-                System.out.println("Student not found!");
-            }
+        if (Database.getInstance().getStudents().containsKey(s.getId())) {
+            Student student = Database.getInstance().getStudents().get(s.getId());
+            student.setName(name);
+            student.setEmail(email);
+            student.setMobileNumber(mobileNumber);
+            Database.getInstance().getStudents().put(s.getId(), student);
+        } else {
+            System.out.println("Student not found!");
         }
     }
 
