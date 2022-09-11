@@ -510,7 +510,7 @@ public class InteractiveInterface {
         Student student = Database.getInstance().getStudentByID(studentID);
 
         if (student == null) {
-            System.out.println("Course not found!\n");
+            System.out.println("Student not found!\n");
             return;
         }
 
@@ -562,7 +562,7 @@ public class InteractiveInterface {
         Student student = Database.getInstance().getStudentByID(id);
 
         if (student == null) {
-            System.out.println("Course not found!\n");
+            System.out.println("Student not found!\n");
             return;
         }
 

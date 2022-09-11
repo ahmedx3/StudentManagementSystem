@@ -1,4 +1,4 @@
-
+import java.util.Map;
 
 public class Admin extends Person {
     private final int id;
@@ -22,18 +22,18 @@ public class Admin extends Person {
     /////////// Functions ///////////
 
     void addTeacher(Teacher t) {
-        Database.getInstance().getTeachers().add(t);
+        Database.getInstance().getTeachers().put(t.getId(),t);
         System.out.println("Teacher added successfully!\n");
     }
 
     void removeTeacher(Teacher t) {
-        Database.getInstance().getTeachers().remove(t);
+        Database.getInstance().getTeachers().remove(t.getId());
         System.out.println("Teacher removed successfully!\n");
     }
 
     void viewAllTeachers() {
-        for(Teacher t: Database.getInstance().getTeachers()){
-            System.out.println(t);
+        for (Map.Entry<Integer,Teacher> entry : Database.getInstance().getTeachers().entrySet()) {
+            System.out.println(entry.getValue());
         }
     }
 
@@ -42,17 +42,13 @@ public class Admin extends Person {
     }
 
     void updateTeacherData(Teacher t,String name,String email,String mobileNumber) {
-        boolean found = false;
-        for (Teacher teacher: Database.getInstance().getTeachers()) {
-            if (teacher.equals(t)) {
-                teacher.setName(name);
-                teacher.setEmail(email);
-                teacher.setMobileNumber(mobileNumber);
-                found = true;
-                System.out.println("Teacher updated successfully!");
-            }
-        }
-        if (!found) {
+        if (Database.getInstance().getTeachers().containsKey(t.getId())) {
+            Teacher teacher = Database.getInstance().getTeachers().get(t.getId());
+            teacher.setName(name);
+            teacher.setEmail(email);
+            teacher.setMobileNumber(mobileNumber);
+            Database.getInstance().getTeachers().put(t.getId(), teacher);
+        } else {
             System.out.println("Teacher not found!");
         }
     }

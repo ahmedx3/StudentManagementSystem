@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Database {
@@ -6,7 +7,7 @@ public class Database {
     private static Database database_instance = null;
 
     // TODO: use hashmap
-    private final List<Teacher> teachers = new ArrayList<>();
+    private final HashMap<Integer,Teacher> teachers = new HashMap<>();
     private final List<Student> students = new ArrayList<>();
     private final List<Course> courses = new ArrayList<>();
     private final List<Assignment> assignments = new ArrayList<>();
@@ -37,7 +38,7 @@ public class Database {
         return courseAttendances;
     }
 
-    public List<Teacher> getTeachers() {
+    public HashMap<Integer,Teacher> getTeachers() {
         return teachers;
     }
 
@@ -50,12 +51,7 @@ public class Database {
     }
 
     Teacher getTeacherByID(int id) {
-        for (Teacher teacher: teachers) {
-            if (teacher.getId() == id) {
-                return teacher;
-            }
-        }
-        return null;
+        return teachers.getOrDefault(id, null);
     }
 
     Student getStudentByID(int id) {
