@@ -4,6 +4,10 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class InteractiveInterface {
+    //TODO: add clear screen
+    //TODO: strategy design pattern
+    //TODO: Use log4j v2 for printing
+    //TODO: String.format for all printing of data with fixed spaces (from documentation) as tables
 
     private Mode mode;
     private Admin admin;

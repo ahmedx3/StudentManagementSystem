@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Student extends Person {
+    //TODO: Add UUID (in any attribute)
+    //TODO: properties from file (key: value)
     private final int id;
     private int age;
     private String address;
@@ -9,17 +11,19 @@ public class Student extends Person {
 
     private static int count = 0;
 
-    private final List<Course> enrolledCourses = new ArrayList<>();
+    public static boolean isPrinted = false;
+
+    public final List<Course> enrolledCourses = new ArrayList<>();
 
     /////////// Constructors ///////////
 
     public Student() {
-        this("Undefined","Undefined","0"
-        ,0,"Undefined",Gender.MALE);
+        this("Undefined", "Undefined", "0"
+                , 0, "Undefined", Gender.MALE);
     }
 
-    public Student(String name, String email, String mobileNumber, int age , String address, Gender gender) {
-        super(name,email,mobileNumber);
+    public Student(String name, String email, String mobileNumber, int age, String address, Gender gender) {
+        super(name, email, mobileNumber);
         this.age = age;
         this.address = address;
         this.gender = gender;
@@ -40,17 +44,18 @@ public class Student extends Person {
 
     void viewEnrolledCourses() {
         System.out.println("My enrolled courses are:");
-        for (Course c: enrolledCourses) {
+        for (Course c : enrolledCourses) {
             System.out.println(c);
         }
     }
 
     void viewAssignments(int courseID) {
-        for(Assignment assignment: Database.getInstance().getAssignments()) {
-            if(assignment.getCourseId() == courseID) {
+        for (Assignment assignment : Database.getInstance().getAssignments()) {
+            if (assignment.getCourseId() == courseID) {
                 System.out.println(assignment);
             }
         }
+        Assignment.isPrinted = false;
     }
 
     void submitAssignment(AssignmentSubmission assignmentSubmission) {
@@ -116,14 +121,14 @@ public class Student extends Person {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", mobileNumber='" + mobileNumber + '\'' +
-                ", age=" + age +
-                ", address='" + address + '\'' +
-                ", gender=" + gender +
-                ", enrolledCourses=" + enrolledCourses +
-                '}';
+        // Create a string builder and append the name, email, mobile number, age , address , gender in format of table
+        StringBuilder sb = new StringBuilder();
+        if (!isPrinted) {
+            sb.append(String.format("%-20s| %-20s| %-20s| %-20s| %-20s| %-20s|%n", "Name", "Email", "Mobile Number", "Age", "Address", "Gender"));
+            isPrinted = true;
+        }
+        sb.append(String.format("%-20s| %-20s| %-20s| %-20d| %-20s| %-20s|%n", name, email, mobileNumber, age, address, gender));
+
+        return sb.toString();
     }
 }

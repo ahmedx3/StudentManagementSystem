@@ -35,10 +35,12 @@ public class Admin extends Person {
         for (Map.Entry<Integer,Teacher> entry : Database.getInstance().getTeachers().entrySet()) {
             System.out.println(entry.getValue());
         }
+        Teacher.isPrinted = false;
     }
 
     void viewTeacherDetails(Teacher t) {
         System.out.println(t);
+        Teacher.isPrinted = false;
     }
 
     void updateTeacherData(Teacher t,String name,String email,String mobileNumber) {
@@ -54,6 +56,7 @@ public class Admin extends Person {
     }
 
     void addStudent(Student s) {
+        // TODO: make exception if already found (custom exception)
         Database.getInstance().getStudents().put(s.getId(),s);
         System.out.println("Student Added Successfully!");
     }
@@ -66,10 +69,12 @@ public class Admin extends Person {
         for (Map.Entry<Integer,Student> entry : Database.getInstance().getStudents().entrySet()) {
             System.out.println(entry.getValue());
         }
+        Student.isPrinted = false;
     }
 
     void viewStudentDetails(Student s) {
         System.out.println(s);
+        Student.isPrinted = false;
     }
 
     void updateStudentData(Student s,String name,String email,String mobileNumber) {

@@ -19,6 +19,7 @@ public class Database {
 
     public static Database getInstance()
     {
+        // TODO: Make it thread safe, (lazy, eager, enum)
         if (database_instance == null)
             database_instance = new Database();
 

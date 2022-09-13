@@ -8,6 +8,8 @@ public class Course {
 
     private List<Student> enrolledStudents = new ArrayList<>();
 
+    public static boolean isPrinted = false;
+
     private static int count = 0;
 
     public Course() {
@@ -68,9 +70,18 @@ public class Course {
 
     @Override
     public String toString() {
-        return "Course{" +
-                "codeName='" + codeName + '\'' +
-                ", teacher=" + teacher +
-                '}';
+//        return "Course{" +
+//                "codeName='" + codeName + '\'' +
+//                ", teacher=" + teacher +
+//                '}';
+        StringBuilder sb = new StringBuilder();
+
+        if (!isPrinted) {
+            sb.append(String.format("%-20s| %-20s|%n", "Course Code", "Teacher Name"));
+            isPrinted = true;
+        }
+
+        sb.append(String.format("%-20s| %-20s|%n", codeName, teacher.getName()));
+        return sb.toString();
     }
 }

@@ -6,6 +6,7 @@ public class Teacher extends Person {
     private final int id;
 
     private static int count = 0;
+    public static boolean isPrinted = false;
 
     /////////// Constructors ///////////
 
@@ -35,7 +36,9 @@ public class Teacher extends Person {
         students = course.getEnrolledStudents();
 
         System.out.println("Students in course " + Database.getInstance().getCourseByID(courseID).getCodeName() + " are:");
-        System.out.println(students);
+        for (Student student: students) {
+            System.out.println(student);
+        }
     }
     
     void getStudentData(int studentID) {
@@ -68,13 +71,32 @@ public class Teacher extends Person {
         for (Map.Entry<Integer,Course> entry : Database.getInstance().getCourses().entrySet()) {
             System.out.println(entry.getValue());
         }
+        Teacher.isPrinted = false;
     }
 
     void viewStudentsAssignedCourses() {
         System.out.println("Students Enrolled Courses are:");
-        for (Map.Entry<Integer,Student> entry : Database.getInstance().getStudents().entrySet()) {
-            System.out.println(entry.getValue());
+//        for (Map.Entry<Integer,Student> entry : Database.getInstance().getStudents().entrySet()) {
+//            System.out.println(entry.getValue());
+//        }
+        // Print all students with their corresponding courses
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%-20s| %-20s%n", "Student Name", "Courses"));
+
+        for (Map.Entry<Integer,Student> student : Database.getInstance().getStudents().entrySet()) {
+            String studentName = student.getValue().getName();
+            sb.append(String.format("%-20s|",studentName));
+            List<Course> courses = student.getValue().enrolledCourses;
+
+            for(Course course: courses) {
+                sb.append(String.format("%-8s,",course.getCodeName()));
+            }
+
+            sb.append(String.format("%n"));
         }
+
+        System.out.println(sb);
+
     }
 
     void createCourse(String codeName) {
@@ -118,10 +140,15 @@ public class Teacher extends Person {
 
     @Override
     public String toString() {
-        return "Teacher{" +
-                "name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", mobileNumber='" + mobileNumber + '\'' +
-                '}';
+        // Create a string builder and append the name, email and mobile number in format of table
+        StringBuilder sb = new StringBuilder();
+
+        if (!isPrinted) {
+            sb.append(String.format("%-20s| %-20s| %-20s|%n", "Name", "Email", "Mobile Number"));
+            isPrinted = true;
+        }
+
+        sb.append(String.format("%-20s| %-20s| %-20s|%n", name, email, mobileNumber));
+        return sb.toString();
     }
 }

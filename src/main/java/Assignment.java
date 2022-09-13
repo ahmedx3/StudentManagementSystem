@@ -8,6 +8,8 @@ public class Assignment {
 
     private static int count = 0;
 
+    public static boolean isPrinted = false;
+
     /////////// Constructors ///////////
 
     public Assignment() {
@@ -50,10 +52,15 @@ public class Assignment {
 
     @Override
     public String toString() {
-        return "Assignment{" +
-                "description='" + description + '\'' +
-                ", dueDate=" + dueDate +
-                '}';
+        StringBuilder sb = new StringBuilder();
+
+        if (!isPrinted) {
+            sb.append(String.format("%-20s| %-20s%n", "Description", "Due Date"));
+            isPrinted = true;
+        }
+
+        sb.append(String.format("%-20s| %-20s|%n", description, dueDate.toString()));
+        return sb.toString();
     }
 
     public void setDueDate(Date dueDate) {
