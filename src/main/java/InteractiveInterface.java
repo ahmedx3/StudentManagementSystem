@@ -1,3 +1,6 @@
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -12,6 +15,8 @@ public class InteractiveInterface {
     private Admin admin;
     private Student student;
     private Teacher teacher;
+
+    private static final Logger logger = LogManager.getLogger(InteractiveInterface.class);
 
     InteractiveInterface() {
         mode = Mode.WELCOME;
@@ -147,6 +152,7 @@ public class InteractiveInterface {
                 Teacher teacher = Database.getInstance().getTeacherByID(techerID);
 
                 if (teacher == null) {
+                    logger.error("Teacher with ID " + techerID + " not found");
                     throw new NotFoundException("Teacher Not found!");
                 }
 
@@ -161,6 +167,7 @@ public class InteractiveInterface {
                 Student student = Database.getInstance().getStudentByID(studentID);
 
                 if (student == null) {
+                    logger.error("Student with ID " + studentID + " not found");
                     throw new NotFoundException("Student Not found!");
                 }
 
@@ -185,6 +192,7 @@ public class InteractiveInterface {
         Student student = Database.getInstance().getStudentByID(id);
 
         if (student == null) {
+            logger.error("Student with ID " + id + " not found");
             throw new NotFoundException("Student Not found!");
         }
 
@@ -208,6 +216,7 @@ public class InteractiveInterface {
         Student student = Database.getInstance().getStudentByID(id);
 
         if (student == null) {
+            logger.error("Student with ID " + id + " not found");
             throw new NotFoundException("Student Not found!");
         }
 
@@ -230,6 +239,7 @@ public class InteractiveInterface {
         Student student = Database.getInstance().getStudentByID(id);
 
         if (student == null) {
+            logger.error("Student with ID " + id + " not found");
             throw new NotFoundException("Student Not found!");
         }
 
@@ -270,6 +280,7 @@ public class InteractiveInterface {
         Teacher teacher = Database.getInstance().getTeacherByID(id);
 
         if (teacher == null) {
+            logger.error("Teacher with ID " + id + " not found");
             throw new NotFoundException("Teacher Not found!");
         }
 
@@ -293,6 +304,7 @@ public class InteractiveInterface {
         Teacher teacher = Database.getInstance().getTeacherByID(id);
 
         if (teacher == null) {
+            logger.error("Teacher with ID " + id + " not found");
             throw new NotFoundException("Teacher Not found!");
         }
 
@@ -315,6 +327,7 @@ public class InteractiveInterface {
         Teacher teacher = Database.getInstance().getTeacherByID(id);
 
         if (teacher == null) {
+            logger.error("Teacher with ID " + id + " not found");
             throw new NotFoundException("Teacher Not found!");
         }
 
@@ -377,6 +390,7 @@ public class InteractiveInterface {
         Assignment assignment = Database.getInstance().getAssignmentByID(assignmentID);
 
         if (assignment == null) {
+            logger.error("Assignment with ID " + assignmentID + " not found");
             throw new NotFoundException("Assignment Not found!");
         }
 
@@ -386,6 +400,7 @@ public class InteractiveInterface {
         Course course = Database.getInstance().getCourseByID(courseID);
 
         if (course == null) {
+            logger.error("Course with ID " + courseID + " not found");
             throw new NotFoundException("Course Not found!");
         }
 
@@ -411,6 +426,7 @@ public class InteractiveInterface {
         Course course = Database.getInstance().getCourseByID(id);
 
         if (course == null) {
+            logger.error("Course with ID " + id + " not found");
             throw new NotFoundException("Course Not found!");
         }
 
@@ -433,6 +449,7 @@ public class InteractiveInterface {
         Course course = Database.getInstance().getCourseByID(id);
 
         if (course == null) {
+            logger.error("Course with ID " + id + " not found");
             throw new NotFoundException("Course Not found!");
         }
 
@@ -492,6 +509,7 @@ public class InteractiveInterface {
         Course course = Database.getInstance().getCourseByID(courseID);
 
         if (course == null) {
+            logger.error("Course with ID " + courseID + " not found");
             throw new NotFoundException("Course Not found!");
         }
 
@@ -501,6 +519,7 @@ public class InteractiveInterface {
         Student student = Database.getInstance().getStudentByID(studentID);
 
         if (student == null) {
+            logger.error("Student with ID " + studentID + " not found");
             throw new NotFoundException("Student Not found!");
         }
 
@@ -526,6 +545,7 @@ public class InteractiveInterface {
         Course course = Database.getInstance().getCourseByID(id);
 
         if (course == null) {
+            logger.error("Course with ID " + id + " not found");
             throw new NotFoundException("Course Not found!");
         }
 
@@ -551,6 +571,7 @@ public class InteractiveInterface {
         Student student = Database.getInstance().getStudentByID(id);
 
         if (student == null) {
+            logger.error("Student with ID " + id + " not found");
             throw new NotFoundException("Student Not found!");
         }
 
@@ -573,6 +594,7 @@ public class InteractiveInterface {
         Course course = Database.getInstance().getCourseByID(id);
 
         if (course == null) {
+            logger.error("Course with ID " + id + " not found");
             throw new NotFoundException("Course Not found!");
         }
 
