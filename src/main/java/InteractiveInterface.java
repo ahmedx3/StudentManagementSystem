@@ -7,7 +7,6 @@ public class InteractiveInterface {
     //TODO: add clear screen
     //TODO: strategy design pattern
     //TODO: Use log4j v2 for printing
-    //TODO: String.format for all printing of data with fixed spaces (from documentation) as tables
 
     private Mode mode;
     private Admin admin;
@@ -18,11 +17,12 @@ public class InteractiveInterface {
         mode = Mode.WELCOME;
     }
 
-    public void run() {
+    public void run() throws NotFoundException {
         while (true) {
             switch(mode) {
                 case WELCOME:
                     welcome();
+                    System.out.flush();
                     break;
                 case ADMIN_REGISTER:
                     adminRegister();
@@ -70,7 +70,7 @@ public class InteractiveInterface {
         mode = Mode.ADMIN_DASHBOARD;
     }
 
-    public void adminDashboard() {
+    public void adminDashboard() throws NotFoundException {
         System.out.println("============ Admin Dashboard ============");
 
         System.out.println("0 - Add Teacher");
@@ -125,7 +125,7 @@ public class InteractiveInterface {
         }
     }
 
-    private void loginScreen() {
+    private void loginScreen() throws NotFoundException {
         System.out.println("============ Login ============");
 
         System.out.println("0 - Admin");
@@ -147,8 +147,7 @@ public class InteractiveInterface {
                 Teacher teacher = Database.getInstance().getTeacherByID(techerID);
 
                 if (teacher == null) {
-                    System.out.println("Not found!\n");
-                    break;
+                    throw new NotFoundException("Teacher Not found!");
                 }
 
                 this.teacher = teacher;
@@ -162,8 +161,7 @@ public class InteractiveInterface {
                 Student student = Database.getInstance().getStudentByID(studentID);
 
                 if (student == null) {
-                    System.out.println("Not found!\n");
-                    break;
+                    throw new NotFoundException("Student Not found!");
                 }
 
                 this.student = student;
@@ -177,7 +175,7 @@ public class InteractiveInterface {
         this.teacher = null;
     }
 
-    private void updateStudentData() {
+    private void updateStudentData() throws NotFoundException {
         System.out.println("============ Update Student Data ============");
 
         System.out.print("Student id to update: ");
@@ -187,8 +185,7 @@ public class InteractiveInterface {
         Student student = Database.getInstance().getStudentByID(id);
 
         if (student == null) {
-            System.out.println("Student not found!\n");
-            return;
+            throw new NotFoundException("Student Not found!");
         }
 
         Scanner sc= new Scanner(System.in);
@@ -202,7 +199,7 @@ public class InteractiveInterface {
         admin.updateStudentData(student,name,email,mobileNumber);
     }
 
-    private void viewStudentDetails() {
+    private void viewStudentDetails() throws NotFoundException {
         System.out.println("============ View Student Details ============");
         System.out.print("Student id to view: ");
         Scanner scan = new Scanner(System.in);
@@ -211,8 +208,7 @@ public class InteractiveInterface {
         Student student = Database.getInstance().getStudentByID(id);
 
         if (student == null) {
-            System.out.println("Student not found!\n");
-            return;
+            throw new NotFoundException("Student Not found!");
         }
 
         admin.viewStudentDetails(student);
@@ -224,7 +220,7 @@ public class InteractiveInterface {
         System.out.println();
     }
 
-    private void removeStudent() {
+    private void removeStudent() throws NotFoundException {
         System.out.println("============ Remove Student ============");
         Scanner sc= new Scanner(System.in);
         System.out.print("Student id to remove: ");
@@ -234,8 +230,7 @@ public class InteractiveInterface {
         Student student = Database.getInstance().getStudentByID(id);
 
         if (student == null) {
-            System.out.println("Student not found!\n");
-            return;
+            throw new NotFoundException("Student Not found!");
         }
 
         admin.removeStudent(student);
@@ -265,7 +260,7 @@ public class InteractiveInterface {
         admin.addStudent(student);
     }
 
-    private void updateTeacherData() {
+    private void updateTeacherData() throws NotFoundException {
         System.out.println("============ Update Teacher Data ============");
 
         System.out.print("Teacher id to update: ");
@@ -275,8 +270,7 @@ public class InteractiveInterface {
         Teacher teacher = Database.getInstance().getTeacherByID(id);
 
         if (teacher == null) {
-            System.out.println("Teacher not found!\n");
-            return;
+            throw new NotFoundException("Teacher Not found!");
         }
 
         Scanner sc= new Scanner(System.in);
@@ -290,7 +284,7 @@ public class InteractiveInterface {
         admin.updateTeacherData(teacher,name,email,mobileNumber);
     }
 
-    private void viewTeacherDetails() {
+    private void viewTeacherDetails() throws NotFoundException {
         System.out.println("============ View Teacher Details ============");
         System.out.print("Teacher id to view: ");
         Scanner scan = new Scanner(System.in);
@@ -299,8 +293,7 @@ public class InteractiveInterface {
         Teacher teacher = Database.getInstance().getTeacherByID(id);
 
         if (teacher == null) {
-            System.out.println("Teacher not found!\n");
-            return;
+            throw new NotFoundException("Teacher Not found!");
         }
 
         admin.viewTeacherDetails(teacher);
@@ -312,7 +305,7 @@ public class InteractiveInterface {
         System.out.println();
     }
 
-    private void removeTeacher() {
+    private void removeTeacher() throws NotFoundException {
         System.out.println("============ Remove Teacher ============");
 
         System.out.print("Teacher id to remove: ");
@@ -322,8 +315,7 @@ public class InteractiveInterface {
         Teacher teacher = Database.getInstance().getTeacherByID(id);
 
         if (teacher == null) {
-            System.out.println("Teacher not found!\n");
-            return;
+            throw new NotFoundException("Teacher Not found!");
         }
 
         admin.removeTeacher(teacher);
@@ -345,7 +337,7 @@ public class InteractiveInterface {
         admin.addTeacher(teacher);
     }
 
-    private void studentDashboard() {
+    private void studentDashboard() throws NotFoundException {
         System.out.println("============ Student Dashboard ============");
 
         System.out.println("0 - Enroll in Course");
@@ -375,7 +367,7 @@ public class InteractiveInterface {
         }
     }
 
-    private void submitAssignment() {
+    private void submitAssignment() throws NotFoundException {
         System.out.println("============ Submit Assignment ============");
 
         System.out.print("Enter assignment ID: ");
@@ -385,8 +377,7 @@ public class InteractiveInterface {
         Assignment assignment = Database.getInstance().getAssignmentByID(assignmentID);
 
         if (assignment == null) {
-            System.out.println("Assignment not found!\n");
-            return;
+            throw new NotFoundException("Assignment Not found!");
         }
 
         System.out.print("Enter course ID : ");
@@ -395,8 +386,7 @@ public class InteractiveInterface {
         Course course = Database.getInstance().getCourseByID(courseID);
 
         if (course == null) {
-            System.out.println("Course not found!\n");
-            return;
+            throw new NotFoundException("Course Not found!");
         }
 
         Date date = new Date();
@@ -411,7 +401,7 @@ public class InteractiveInterface {
         this.student.submitAssignment(new AssignmentSubmission(assignmentID,this.student.getId(),courseID,date,assignmentContent,marks));
     }
 
-    private void viewAssignments() {
+    private void viewAssignments() throws NotFoundException {
         System.out.println("============ View Assignments ============");
 
         System.out.print("Enter course ID to view: ");
@@ -421,8 +411,7 @@ public class InteractiveInterface {
         Course course = Database.getInstance().getCourseByID(id);
 
         if (course == null) {
-            System.out.println("Course not found!\n");
-            return;
+            throw new NotFoundException("Course Not found!");
         }
 
         this.student.viewAssignments(id);
@@ -434,7 +423,7 @@ public class InteractiveInterface {
         this.student.viewEnrolledCourses();
     }
 
-    private void enrollInCourse() {
+    private void enrollInCourse() throws NotFoundException {
         System.out.println("============ Enroll In Course ============");
 
         System.out.print("Enter course ID to enroll: ");
@@ -444,14 +433,13 @@ public class InteractiveInterface {
         Course course = Database.getInstance().getCourseByID(id);
 
         if (course == null) {
-            System.out.println("Course not found!\n");
-            return;
+            throw new NotFoundException("Course Not found!");
         }
 
         this.student.enrollInCourse(course);
     }
 
-    private void teacherDashboard() {
+    private void teacherDashboard() throws NotFoundException {
         System.out.println("============ Teacher Dashboard ============");
 
         System.out.println("0 - Create course");
@@ -494,7 +482,7 @@ public class InteractiveInterface {
         }
     }
 
-    private void submitStudentsAttendance() {
+    private void submitStudentsAttendance() throws NotFoundException {
         System.out.println("============ Submit Student Attendance ============");
 
         Scanner sc = new Scanner(System.in);
@@ -504,8 +492,7 @@ public class InteractiveInterface {
         Course course = Database.getInstance().getCourseByID(courseID);
 
         if (course == null) {
-            System.out.println("Course not found!\n");
-            return;
+            throw new NotFoundException("Course Not found!");
         }
 
         System.out.print("Enter student ID: ");
@@ -514,8 +501,7 @@ public class InteractiveInterface {
         Student student = Database.getInstance().getStudentByID(studentID);
 
         if (student == null) {
-            System.out.println("Student not found!\n");
-            return;
+            throw new NotFoundException("Student Not found!");
         }
 
         System.out.print("Enter Attendance Date (YYYY-MM-DD): ");
@@ -530,7 +516,7 @@ public class InteractiveInterface {
         this.teacher.submitStudentsAttendance(new CourseAttendance(courseID,studentID,date,status));
     }
 
-    private void addAssignment() {
+    private void addAssignment() throws NotFoundException {
         System.out.println("============ Add Assignment ============");
 
         Scanner sc = new Scanner(System.in);
@@ -540,8 +526,7 @@ public class InteractiveInterface {
         Course course = Database.getInstance().getCourseByID(id);
 
         if (course == null) {
-            System.out.println("Course not found!\n");
-            return;
+            throw new NotFoundException("Course Not found!");
         }
 
         System.out.print("Enter Assignment Description: ");
@@ -556,7 +541,7 @@ public class InteractiveInterface {
         this.teacher.addAssignment(new Assignment(description,id,date));
     }
 
-    private void getStudentData() {
+    private void getStudentData() throws NotFoundException {
         System.out.println("============ View Student Data ============");
 
         Scanner sc = new Scanner(System.in);
@@ -566,8 +551,7 @@ public class InteractiveInterface {
         Student student = Database.getInstance().getStudentByID(id);
 
         if (student == null) {
-            System.out.println("Student not found!\n");
-            return;
+            throw new NotFoundException("Student Not found!");
         }
 
         this.teacher.getStudentData(id);
@@ -579,7 +563,7 @@ public class InteractiveInterface {
         this.teacher.getAllCourses();
     }
 
-    private void getStudentsInCourse() {
+    private void getStudentsInCourse() throws NotFoundException {
         System.out.println("============ View Students In Course ============");
 
         Scanner sc = new Scanner(System.in);
@@ -589,8 +573,7 @@ public class InteractiveInterface {
         Course course = Database.getInstance().getCourseByID(id);
 
         if (course == null) {
-            System.out.println("Course not found!\n");
-            return;
+            throw new NotFoundException("Course Not found!");
         }
 
         this.teacher.getStudentsInCourse(id);
