@@ -56,7 +56,6 @@ public class Admin extends Person {
     }
 
     void addStudent(Student s) {
-        // TODO: make exception if already found (custom exception)
         Database.getInstance().getStudents().put(s.getId(),s);
         System.out.println("Student Added Successfully!");
     }

@@ -4,9 +4,9 @@ public class AssignmentSubmission {
     private int assignmentId;
     private int studentId;
     private int courseId;
-    private Date submissionDate; // TODO : make date = today in constructor
+    private Date submissionDate;
     private String assignmentContentSubmitted;
-    private float assignmentMarks; // TODO : make assignmentMarks=0 in constructor
+    private float assignmentMarks;
 
     /////////// Constructors ///////////
 
