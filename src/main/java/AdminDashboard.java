@@ -151,7 +151,7 @@ public class AdminDashboard implements Dashboard {
         String address = sc.nextLine();
         System.out.print("Enter gender (M or F): ");
         String genderString = sc.nextLine();
-        Gender gender = ((genderString.toUpperCase().equals("M")) ? Gender.MALE : Gender.FEMALE);
+        Gender gender = ((genderString.equalsIgnoreCase("M")) ? Gender.MALE : Gender.FEMALE);
 
         Student student = new Student(name, email, mobileNumber, age, address, gender);
 
@@ -160,7 +160,6 @@ public class AdminDashboard implements Dashboard {
 
     private void removeStudent() throws NotFoundException {
         System.out.println("============ Remove Student ============");
-        Scanner sc = new Scanner(System.in);
         System.out.print("Student id to remove: ");
         Scanner scan = new Scanner(System.in);
         int id = scan.nextInt();
