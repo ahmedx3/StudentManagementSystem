@@ -17,7 +17,7 @@ public class Teacher extends Person {
     }
 
     public Teacher(String name, String email, String mobileNumber) {
-        super(name,email,mobileNumber);
+        super(name, email, mobileNumber);
         this.id = count;
         count++;
     }
@@ -36,11 +36,11 @@ public class Teacher extends Person {
         students = course.getEnrolledStudents();
 
         System.out.println("Students in course " + Database.getInstance().getCourseByID(courseID).getCodeName() + " are:");
-        for (Student student: students) {
+        for (Student student : students) {
             System.out.println(student);
         }
     }
-    
+
     void getStudentData(int studentID) {
         Student student = Database.getInstance().getStudents().getOrDefault(studentID, null);
 
@@ -58,7 +58,7 @@ public class Teacher extends Person {
     }
 
     void submitStudentsAttendance(CourseAttendance[] courseAttendances) {
-        for (CourseAttendance courseAttendance: courseAttendances) {
+        for (CourseAttendance courseAttendance : courseAttendances) {
             Database.getInstance().getCourseAttendances().add(courseAttendance);
         }
     }
@@ -68,28 +68,25 @@ public class Teacher extends Person {
     }
 
     void getAllCourses() {
-        for (Map.Entry<Integer,Course> entry : Database.getInstance().getCourses().entrySet()) {
+        for (Map.Entry<Integer, Course> entry : Database.getInstance().getCourses().entrySet()) {
             System.out.println(entry.getValue());
         }
-        Teacher.isPrinted = false;
+        Course.isPrinted = false;
     }
 
     void viewStudentsAssignedCourses() {
         System.out.println("Students Enrolled Courses are:");
-//        for (Map.Entry<Integer,Student> entry : Database.getInstance().getStudents().entrySet()) {
-//            System.out.println(entry.getValue());
-//        }
         // Print all students with their corresponding courses
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%-20s| %-20s%n", "Student Name", "Courses"));
 
-        for (Map.Entry<Integer,Student> student : Database.getInstance().getStudents().entrySet()) {
+        for (Map.Entry<Integer, Student> student : Database.getInstance().getStudents().entrySet()) {
             String studentName = student.getValue().getName();
-            sb.append(String.format("%-20s|",studentName));
+            sb.append(String.format("%-20s|", studentName));
             List<Course> courses = student.getValue().enrolledCourses;
 
-            for(Course course: courses) {
-                sb.append(String.format("%-8s,",course.getCodeName()));
+            for (Course course : courses) {
+                sb.append(String.format("%-8s,", course.getCodeName()));
             }
 
             sb.append(String.format("%n"));
@@ -100,8 +97,8 @@ public class Teacher extends Person {
     }
 
     void createCourse(String codeName) {
-        Course course = new Course(codeName,this);
-        Database.getInstance().getCourses().put(course.getId(),course);
+        Course course = new Course(codeName, this);
+        Database.getInstance().getCourses().put(course.getId(), course);
         System.out.println("Course Added Successfully!\n");
     }
 

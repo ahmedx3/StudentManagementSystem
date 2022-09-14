@@ -1,7 +1,6 @@
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -13,13 +12,12 @@ import java.util.Properties;
 import java.util.Scanner;
 
 public class InteractiveInterface {
-    //TODO: add clear screen
     //TODO: factory design pattern
 
-    private Mode mode;
-    private Admin admin;
-    private Student student;
-    private Teacher teacher;
+    public static Mode mode;
+    public static Admin admin;
+    public static Student student;
+    public static Teacher teacher;
 
     private static final Logger logger = LogManager.getLogger(InteractiveInterface.class);
 
@@ -30,6 +28,7 @@ public class InteractiveInterface {
     public void run() throws NotFoundException {
         while (true) {
             try {
+                DashboardFactory dashboardFactory = new DashboardFactory();
                 switch (mode) {
                     case WELCOME:
                         welcome();
@@ -38,7 +37,8 @@ public class InteractiveInterface {
                         adminRegister();
                         break;
                     case ADMIN_DASHBOARD:
-                        adminDashboard();
+//                        adminDashboard();
+                        dashboardFactory.getDashboard("ADMIN").dashboard();
                         break;
                     case LOGIN_SCREEN:
                         loginScreen();
@@ -169,12 +169,12 @@ public class InteractiveInterface {
             case 1:
                 System.out.print("Enter your ID: ");
                 Scanner scanTeacher = new Scanner(System.in);
-                int techerID = scanTeacher.nextInt();
+                int teacherID = scanTeacher.nextInt();
 
-                Teacher teacher = Database.getInstance().getTeacherByID(techerID);
+                Teacher teacher = Database.getInstance().getTeacherByID(teacherID);
 
                 if (teacher == null) {
-                    throw new NotFoundException("Teacher", techerID);
+                    throw new NotFoundException("Teacher", teacherID);
                 }
 
                 this.teacher = teacher;
@@ -196,10 +196,10 @@ public class InteractiveInterface {
         }
     }
 
-    private void logout() {
+    public static void logout() {
         mode = Mode.LOGIN_SCREEN;
-        this.student = null;
-        this.teacher = null;
+        student = null;
+        teacher = null;
     }
 
     private void updateStudentData() throws NotFoundException {
@@ -249,7 +249,6 @@ public class InteractiveInterface {
 
     private void removeStudent() throws NotFoundException {
         System.out.println("============ Remove Student ============");
-        Scanner sc = new Scanner(System.in);
         System.out.print("Student id to remove: ");
         Scanner scan = new Scanner(System.in);
         int id = scan.nextInt();
