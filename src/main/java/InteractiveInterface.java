@@ -1,9 +1,15 @@
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class InteractiveInterface {
@@ -72,9 +78,23 @@ public class InteractiveInterface {
         System.out.print("Enter mobile number: ");
         String mobileNumber = sc.nextLine();
 
-        admin = new Admin(name, email, mobileNumber);
 
-        mode = Mode.ADMIN_DASHBOARD;
+        try (InputStream input = Files.newInputStream(Paths.get("src/main/resources/config.properties"))) {
+
+            Properties prop = new Properties();
+            prop.load(input);
+
+            if (prop.getProperty("admin.name").equals(name) && prop.getProperty("admin.email").equals(email) && prop.getProperty("admin.mobileNumber").equals(mobileNumber)) {
+                admin = new Admin(name, email, mobileNumber);
+                mode = Mode.LOGIN_SCREEN;
+            } else {
+                System.out.println("Wrong credentials!");
+            }
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
     }
 
     public void adminDashboard() throws NotFoundException {
