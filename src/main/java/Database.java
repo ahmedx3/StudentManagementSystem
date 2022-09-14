@@ -2,6 +2,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+// Enum singleton - the preferred approach
+//public enum Database {
+//    INSTANCE;
+//
+//}
+
 public class Database {
 
     // Lazy initialization
@@ -10,22 +16,18 @@ public class Database {
     // eager initialization
     //    private static final Database instance = new Database();
 
-
-
-    private final HashMap<Integer,Teacher> teachers = new HashMap<>();
-    private final HashMap<Integer,Student> students = new HashMap<>();
-    private final HashMap<Integer,Course> courses = new HashMap<>();
+    private final HashMap<Integer, Teacher> teachers = new HashMap<>();
+    private final HashMap<Integer, Student> students = new HashMap<>();
+    private final HashMap<Integer, Course> courses = new HashMap<>();
     private final List<Assignment> assignments = new ArrayList<>();
     private final List<AssignmentSubmission> assignmentSubmissions = new ArrayList<>();
     private final List<CourseAttendance> courseAttendances = new ArrayList<>();
 
-    private Database()
-    {
+    private Database() {
     }
 
     // Lazy constructor
-    public static Database getInstance()
-    {
+    public static Database getInstance() {
         if (database_instance == null)
             database_instance = new Database();
 
@@ -58,15 +60,15 @@ public class Database {
         return courseAttendances;
     }
 
-    public HashMap<Integer,Teacher> getTeachers() {
+    public HashMap<Integer, Teacher> getTeachers() {
         return teachers;
     }
 
-    public HashMap<Integer,Student> getStudents() {
+    public HashMap<Integer, Student> getStudents() {
         return students;
     }
 
-    public HashMap<Integer,Course> getCourses() {
+    public HashMap<Integer, Course> getCourses() {
         return courses;
     }
 
@@ -83,7 +85,7 @@ public class Database {
     }
 
     Assignment getAssignmentByID(int id) {
-        for (Assignment assignment: assignments) {
+        for (Assignment assignment : assignments) {
             if (assignment.getId() == id) {
                 return assignment;
             }
