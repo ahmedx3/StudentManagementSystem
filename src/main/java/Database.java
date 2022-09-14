@@ -4,7 +4,13 @@ import java.util.List;
 
 public class Database {
 
+    // Lazy initialization
     private static Database database_instance = null;
+
+    // eager initialization
+    //    private static final Database instance = new Database();
+
+
 
     private final HashMap<Integer,Teacher> teachers = new HashMap<>();
     private final HashMap<Integer,Student> students = new HashMap<>();
@@ -17,6 +23,7 @@ public class Database {
     {
     }
 
+    // Lazy constructor
     public static Database getInstance()
     {
         // TODO: Make it thread safe, (lazy, eager, enum)
@@ -25,6 +32,20 @@ public class Database {
 
         return database_instance;
     }
+
+    // Thread safe constructor
+    /*public static synchronized Database getInstance(){
+        if(database_instance == null){
+            database_instance = new Database();
+        }
+        return database_instance;
+    }*/
+
+    // eager constructor
+    /* public static Database getInstance() {
+        return instance;
+    }*/
+
 
     public List<Assignment> getAssignments() {
         return assignments;
