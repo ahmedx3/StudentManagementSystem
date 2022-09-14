@@ -1,3 +1,6 @@
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +10,8 @@ public class Teacher extends Person {
 
     private static int count = 0;
     public static boolean isPrinted = false;
+
+    private static final Logger logger = LogManager.getLogger(Teacher.class);
 
     /////////// Constructors ///////////
 
@@ -54,6 +59,7 @@ public class Teacher extends Person {
 
     void addAssignment(Assignment assignment) {
         Database.getInstance().getAssignments().add(assignment);
+        logger.info("Assignment " + assignment.getId() + " added to database");
         System.out.println("Assignment added successfully!");
     }
 
@@ -99,6 +105,7 @@ public class Teacher extends Person {
     void createCourse(String codeName) {
         Course course = new Course(codeName, this);
         Database.getInstance().getCourses().put(course.getId(), course);
+        logger.info("Course " + course.getId() + " added to database");
         System.out.println("Course Added Successfully!\n");
     }
 

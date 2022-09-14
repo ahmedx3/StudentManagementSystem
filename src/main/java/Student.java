@@ -1,3 +1,6 @@
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +17,8 @@ public class Student extends Person {
     public static boolean isPrinted = false;
 
     public final List<Course> enrolledCourses = new ArrayList<>();
+
+    private static final Logger logger = LogManager.getLogger(Student.class);
 
     /////////// Constructors ///////////
 
@@ -39,6 +44,7 @@ public class Student extends Person {
         Course course = Database.getInstance().getCourses().getOrDefault(c.getId(), null);
         course.enrollStudent(this);
 
+        logger.info("Student " + this.getName() + " enrolled in course " + c.getCodeName());
         System.out.println("Enrolled Successfully!\n");
     }
 
