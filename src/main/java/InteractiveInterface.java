@@ -44,10 +44,13 @@ public class InteractiveInterface {
                         loginScreen();
                         break;
                     case STUDENT_DASHBOARD:
-                        studentDashboard();
+//                        studentDashboard();
+                        dashboardFactory.getDashboard("STUDENT").dashboard();
                         break;
                     case TEACHER_DASHBOARD:
-                        teacherDashboard();
+//                        teacherDashboard();
+                        dashboardFactory.getDashboard("TEACHER").dashboard();
+                        break;
                 }
             } catch (Exception e) {
                 logger.error(e.getMessage());

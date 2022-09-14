@@ -13,7 +13,7 @@ public class Assignment {
     /////////// Constructors ///////////
 
     public Assignment() {
-        this("Undefined",-1,new Date());
+        this("Undefined", -1, new Date());
     }
 
     public Assignment(String description, int courseId, Date dueDate) {
@@ -55,11 +55,15 @@ public class Assignment {
         StringBuilder sb = new StringBuilder();
 
         if (!isPrinted) {
+            sb.append(ConsoleColors.BLUE);
             sb.append(String.format("%-20s| %-20s%n", "Description", "Due Date"));
+            sb.append(ConsoleColors.RESET);
             isPrinted = true;
         }
 
+        sb.append(ConsoleColors.GREEN);
         sb.append(String.format("%-20s| %-20s|%n", description, dueDate.toString()));
+        sb.append(ConsoleColors.RESET);
         return sb.toString();
     }
 

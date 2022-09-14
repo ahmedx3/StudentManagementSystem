@@ -141,11 +141,15 @@ public class Teacher extends Person {
         StringBuilder sb = new StringBuilder();
 
         if (!isPrinted) {
+            sb.append(ConsoleColors.BLUE);
             sb.append(String.format("%-20s| %-20s| %-20s|%n", "Name", "Email", "Mobile Number"));
+            sb.append(ConsoleColors.RESET);
             isPrinted = true;
         }
 
+        sb.append(ConsoleColors.GREEN);
         sb.append(String.format("%-20s| %-20s| %-20s|%n", name, email, mobileNumber));
+        sb.append(ConsoleColors.RESET);
         return sb.toString();
     }
 }

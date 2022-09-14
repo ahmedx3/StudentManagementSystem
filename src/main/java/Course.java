@@ -13,7 +13,7 @@ public class Course {
     private static int count = 0;
 
     public Course() {
-        this("Undefined",new Teacher());
+        this("Undefined", new Teacher());
     }
 
     public Course(String codeName, Teacher teacher) {
@@ -31,7 +31,7 @@ public class Course {
 
     public void viewEnrolledStudents() {
         System.out.println("Enrolled students are: ");
-        for (Student s: enrolledStudents) {
+        for (Student s : enrolledStudents) {
             System.out.println(s);
         }
     }
@@ -70,18 +70,18 @@ public class Course {
 
     @Override
     public String toString() {
-//        return "Course{" +
-//                "codeName='" + codeName + '\'' +
-//                ", teacher=" + teacher +
-//                '}';
         StringBuilder sb = new StringBuilder();
 
         if (!isPrinted) {
+            sb.append(ConsoleColors.BLUE);
             sb.append(String.format("%-20s| %-20s|%n", "Course Code", "Teacher Name"));
+            sb.append(ConsoleColors.RESET);
             isPrinted = true;
         }
 
+        sb.append(ConsoleColors.GREEN);
         sb.append(String.format("%-20s| %-20s|%n", codeName, teacher.getName()));
+        sb.append(ConsoleColors.RESET);
         return sb.toString();
     }
 }
